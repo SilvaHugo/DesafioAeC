@@ -6,9 +6,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DesafioAeC.Infra.Data.Contexto
 {
-    public class Contexto : DbContext
+    public class DesafioAeCContexto : DbContext
     {
-        public Contexto()
+        public DesafioAeCContexto()
             : base("DesafioAeC")
         {
             

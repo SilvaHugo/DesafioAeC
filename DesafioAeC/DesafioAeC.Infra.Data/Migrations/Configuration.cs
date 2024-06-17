@@ -5,7 +5,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DesafioAeC.Infra.Data.Contexto.Contexto>
+    internal sealed class Configuration : DbMigrationsConfiguration<DesafioAeC.Infra.Data.Contexto.DesafioAeCContexto>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(DesafioAeC.Infra.Data.Contexto.Contexto context)
+        protected override void Seed(DesafioAeC.Infra.Data.Contexto.DesafioAeCContexto context)
         {
             //  This method will be called after migrating to the latest version.
 

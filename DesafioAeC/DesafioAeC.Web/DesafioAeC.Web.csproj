@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DesafioAeC.Dominio\DesafioAeC.Dominio.csproj" />
+  </ItemGroup>
+
 </Project>
