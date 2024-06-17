@@ -6,5 +6,9 @@ namespace DesafioAeC.Infra.Data.Repositories
 {
     public class UsuarioRepositorio : RepositorioBase<Usuario>, IUsuarioRepositorio
     {
+        public bool AutenticarUsuario()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

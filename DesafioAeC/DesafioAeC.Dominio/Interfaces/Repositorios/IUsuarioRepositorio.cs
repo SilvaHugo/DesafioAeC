@@ -5,5 +5,6 @@ namespace DesafioAeC.Dominio.Interfaces.Repositorios
 {
     public interface IUsuarioRepositorio : IRepositorioBase<Usuario>
     {
+        public bool AutenticarUsuario();
     }
 }
