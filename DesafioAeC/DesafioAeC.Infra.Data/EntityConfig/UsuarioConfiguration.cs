@@ -1,21 +1,22 @@
 ﻿using DesafioAeC.Dominio.Entities;
-using System.Data.Entity.ModelConfiguration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DesafioAeC.Infra.Data.EntityConfig
 {
-    public class UsuarioConfiguration : EntityTypeConfiguration<Usuario>
+    public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
     {
-        public UsuarioConfiguration()
+        public void Configure(EntityTypeBuilder<Usuario> builder)
         {
-            HasKey(x => x.Id);
+            builder.HasKey(x => x.Id);
 
-            Property(x => x.Nome)
+            builder.Property(x => x.Nome)
                 .IsRequired();
 
-            Property(x => x.Login)
+            builder.Property(x => x.Login)
                 .IsRequired();
 
-            Property(x => x.Senha)
+            builder.Property(x => x.Senha)
                 .IsRequired();
         }
     }

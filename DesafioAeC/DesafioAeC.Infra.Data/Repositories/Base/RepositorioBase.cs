@@ -1,43 +1,49 @@
 ﻿using DesafioAeC.Dominio.Interfaces.Repositorios.Base;
 using DesafioAeC.Infra.Data.Contexto;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DesafioAeC.Infra.Data.Repositories.Base
 {
     public class RepositorioBase<TEntidade> : IDisposable, IRepositorioBase<TEntidade>
         where TEntidade : class
     {
-        protected DesafioAeCContexto Db = new DesafioAeCContexto();
+        protected DbContext Context { get; set; }
+
+        public RepositorioBase(DbContext context)
+        {
+            Context = context;
+        }
+
         public void Alterar(TEntidade obj)
         {
-            Db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
-            Db.SaveChanges();
+            Context.Set<TEntidade>().Update(obj);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Context.Dispose();
+            //throw new NotImplementedException();
         }
 
         public void Inserir(TEntidade obj)
         {
-            Db.Set<TEntidade>().Add(obj);
-            Db.SaveChanges();
+            Context.Set<TEntidade>().Add(obj);
         }
 
         public TEntidade ObterPorId(Guid id)
         {
-            return Db.Set<TEntidade>().Find(id);
+            return Context.Set<TEntidade>().Find(id);
         }
 
         public IEnumerable<TEntidade> ObterTodos()
         {
-            return Db.Set<TEntidade>().ToList();
+            return Context.Set<TEntidade>().AsNoTracking();
         }
 
         public void Remover(TEntidade obj)
         {
-            Db.Set<TEntidade>().Remove(obj);
-            Db.SaveChanges();
+            Context.Set<TEntidade>().Remove(obj);
         }
     }
 }

@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DesafioAeC.Dominio\DesafioAeC.Dominio.csproj" />
+    <ProjectReference Include="..\Integracoes\DesafioAeC.Integracoes.csproj" />
   </ItemGroup>
 
 </Project>

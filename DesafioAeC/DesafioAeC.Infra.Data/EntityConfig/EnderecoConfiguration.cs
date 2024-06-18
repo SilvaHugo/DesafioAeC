@@ -1,41 +1,43 @@
 ﻿using DesafioAeC.Dominio.Entidades;
-using System.Data.Entity.ModelConfiguration;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAeC.Infra.Data.EntityConfig
 {
-    public class EnderecoConfiguration : EntityTypeConfiguration<Endereco>
+    public class EnderecoConfiguration : IEntityTypeConfiguration<Endereco>
     {
-        public EnderecoConfiguration()
+        public void Configure(EntityTypeBuilder<Endereco> builder)
         {
-            HasKey(x => x.Id);
+            builder.HasKey(x => x.Id);
 
-            Property(x => x.Bairro)
+            builder.Property(x => x.Bairro)
                 .IsRequired();
 
-            Property(x => x.Cep)
+            builder.Property(x => x.Cep)
                 .IsRequired();
 
-            Property(x => x.Cidade)
+            builder.Property(x => x.Cidade)
                 .IsRequired();
 
-            Property(x => x.Complemento)
-                .IsOptional();
+            builder.Property(x => x.Complemento)
+                .IsRequired(false);
 
-            Property(x => x.Logradouro)
+            builder.Property(x => x.Logradouro)
                 .IsRequired();
 
-            Property(x => x.Numero)
+            builder.Property(x => x.Numero)
                 .IsRequired();
 
-            Property(x => x.Uf)
+            builder.Property(x => x.Uf)
                 .IsRequired();
 
-            Property(x => x.UsuarioId)
+            builder.Property(x => x.UsuarioId)
                 .IsRequired();
 
-            HasRequired(x => x.Usuario)
-            .WithMany(u => u.Enderecos)
-            .HasForeignKey(x => x.UsuarioId);
+            builder.HasOne(x => x.Usuario)
+                .WithMany(u => u.Enderecos)
+                .HasForeignKey(x => x.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict); //remover a exclusão em cascata
         }
     }
 }

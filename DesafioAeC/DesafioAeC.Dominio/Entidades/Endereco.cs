@@ -11,7 +11,7 @@ namespace DesafioAeC.Dominio.Entidades
         public string? Bairro { get; set; }
         public string? Cidade { get; set; }
         public string? Uf { get; set; }
-        public int? Numero { get; set; }
+        public string? Numero { get; set; }
         public Guid UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
     }
