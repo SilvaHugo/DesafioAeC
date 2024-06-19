@@ -1,0 +1,63 @@
+﻿@model DesafioAeC.Web.ViewModels.EnderecoViewModel
+
+@{
+    ViewData["Title"] = "Remover";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div>
+    <h4>Deseja mesmo remover este registro?</h4>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cep)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CepFormatado)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Logradouro)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Logradouro)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Complemento)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Complemento)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Bairro)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Bairro)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cidade)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cidade)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Uf)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Uf)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Numero)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Numero)
+            </dd>
+        </dl>
+    </div>
+    <form asp-action="Remover">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Remover" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+    </form>
+</div>

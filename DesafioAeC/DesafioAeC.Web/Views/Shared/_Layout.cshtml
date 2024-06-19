@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DesafioAeC.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/toastr/toastr.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DesafioAeC.Web.styles.css" asp-append-version="true" />
 </head>
@@ -32,6 +33,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <partial name="_Alertas"/>
             @RenderBody()
         </main>
     </div>
@@ -41,7 +43,9 @@
             &copy; 2024 - DesafioAeC.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/toastr/toastr.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

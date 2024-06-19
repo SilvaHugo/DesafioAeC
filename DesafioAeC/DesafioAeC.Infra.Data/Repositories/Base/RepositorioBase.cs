@@ -18,6 +18,7 @@ namespace DesafioAeC.Infra.Data.Repositories.Base
         public void Alterar(TEntidade obj)
         {
             Context.Set<TEntidade>().Update(obj);
+            Context.SaveChanges();
         }
 
         public void Dispose()
@@ -29,6 +30,7 @@ namespace DesafioAeC.Infra.Data.Repositories.Base
         public void Inserir(TEntidade obj)
         {
             Context.Set<TEntidade>().Add(obj);
+            Context.SaveChanges();
         }
 
         public TEntidade ObterPorId(Guid id)
@@ -44,6 +46,7 @@ namespace DesafioAeC.Infra.Data.Repositories.Base
         public void Remover(TEntidade obj)
         {
             Context.Set<TEntidade>().Remove(obj);
+            Context.SaveChanges();
         }
     }
 }
