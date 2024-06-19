@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.mg-left {
+    margin-left: 10px;
+}
+
+.mg-top {
+    margin-top: 10px;
+}
+
+.line-end {
+    float: inline-end;
+}

@@ -23,6 +23,11 @@
                 <span asp-validation-for="Logradouro" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Numero" class="control-label"></label>
+                <input asp-for="Numero" class="form-control" />
+                <span asp-validation-for="Numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Complemento" class="control-label"></label>
                 <input asp-for="Complemento" class="form-control" />
                 <span asp-validation-for="Complemento" class="text-danger"></span>
@@ -41,21 +46,17 @@
                 <label asp-for="Uf" class="control-label"></label>
                 <input asp-for="Uf" class="form-control" />
                 <span asp-validation-for="Uf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div>            
+            <div class="form-group mg-top">
                 <input type="submit" value="Salvar" class="btn btn-outline-success" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
+    
 </div>
 
 @section Scripts {
@@ -70,14 +71,24 @@
                         dataType: 'json',
                         data: { cep: cep },
                         success: function (data) {
+                            if (data == null) {
+                                toastr.error('Não foi possível encontrar informações do CEP informado.');
+                                $('#Logradouro').val('');
+                                $('#Complemento').val('');
+                                $('#Bairro').val('');
+                                $('#Cidade').val('');
+                                $('#Uf').val('');
+                            }
+
                             $('#Logradouro').val(data.logradouro);
+                            $('#Complemento').val(data.complemento);
                             $('#Bairro').val(data.bairro);
-                            $('#Cidade').val(data.localidade);
+                            $('#Cidade').val(data.cidade);
                             $('#Uf').val(data.uf);
-                            // Preencher outros campos conforme necessário
+                            $('#Numero').focus();
                         },
-                        error: function () {
-                            alert('Erro ao buscar informações do CEP.');
+                        error: function (data) {
+                            toastr.error('Erro ao buscar informações do CEP.');
                         }
                     });
                 }

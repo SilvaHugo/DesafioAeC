@@ -10,7 +10,7 @@
     <div class="form-group">
         <label asp-for="Cep">CEP</label>
         <input type="text" class="form-control" asp-for="Cep" id="cepInput" autocomplete="postal-code">
-        <span asp-validation-for="Cep" class="text-danger"></span>
+        <span asp-validation-for="Cep" id="cepLabel" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -51,17 +51,48 @@
 
     <!-- Outros campos do endereço -->
 
-    <div class="form-group">
+    <div class="form-group mg-top">
         <button type="submit" class="btn btn-success">Salvar</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
     </div>
     
 </form>
 
-<a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
-
 
 @section Scripts {
-    @{
-        Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script>
+        $(document).ready(function () {
+            $('#cepInput').keyup(function () {
+                var cep = $(this).val().replace(/\D/g, '');
+                if (cep.length == 8) {
+                    $.ajax({
+                        url: '@Url.Action("ConsultarEnderecoPorCep", "Endereco")',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { cep: cep },
+                        success: function (data) {
+                            if(data == null){
+                                toastr.error('Não foi possível encontrar informações do CEP informado.');
+                                $('#Logradouro').val('');
+                                $('#Complemento').val('');
+                                $('#Bairro').val('');
+                                $('#Cidade').val('');
+                                $('#Uf').val('');
+                            }
+
+                            $('#Logradouro').val(data.logradouro);
+                            $('#Complemento').val(data.complemento);
+                            $('#Bairro').val(data.bairro);
+                            $('#Cidade').val(data.cidade);
+                            $('#Uf').val(data.uf);
+                            $('#Numero').focus();
+                        },
+                        error: function (data) {
+                            toastr.error('Erro ao buscar informações do CEP.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 }

@@ -5,7 +5,6 @@ using DesafioAeC.Web.FluentValidation;
 using DesafioAeC.Web.ViewModels;
 using Integracoes.ViaCEP.Dto;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 
 namespace DesafioAeC.Web.Controllers
 {
@@ -57,7 +56,7 @@ namespace DesafioAeC.Web.Controllers
                 if (validationResult.IsValid)
                 {
                     var enderecoEntity = _mapper.Map<Endereco>(endereco);
-                    _enderecoNegocio.HandleInserirEndereco(enderecoEntity);
+                    _enderecoNegocio.Inserir(enderecoEntity);
 
                     TempData["SuccessMessage"] = "Endereço criado com sucesso!";
                     return RedirectToAction(nameof(Detalhes), new { id = enderecoEntity.Id });
@@ -145,16 +144,24 @@ namespace DesafioAeC.Web.Controllers
 
         [HttpGet]
         public async Task<ActionResult> ConsultarEnderecoPorCep(string cep)
-        {
-            var consultaCepResponse = await _enderecoNegocio.ConsultarEnderecoPorCep(new ConsultaCepRequest() { Cep = cep });
-
-            if (consultaCepResponse.Sucesso)
+         {
+            try
             {
-                var cepViewModel = _mapper.Map<CepViewModel>(consultaCepResponse.ConsultaCep);
-                return View(cepViewModel);
-            }
+                var consultaCepResponse = await _enderecoNegocio.ConsultarEnderecoPorCep(new ConsultaCepRequest() { Cep = cep });
 
-            return View();
+                if (consultaCepResponse.Sucesso)
+                {
+                    var cepViewModel = _mapper.Map<CepViewModel>(consultaCepResponse.ConsultaCep);
+                    return Json(cepViewModel);
+                }
+
+                return Json(null);
+            }
+            catch //(Exception ex)
+            {
+                //logar infos do erro
+                return Json(null);
+            }            
         }
     }
 }

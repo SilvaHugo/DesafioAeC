@@ -1,11 +1,12 @@
 ﻿using DesafioAeC.Dominio.Arguments.Error;
+using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
 namespace Integracoes.ViaCEP.Dto
 {
     public class ConsultaCepResponse
     {
-        public bool Sucesso { get; set; }
+        public bool Sucesso { get; set; } = false;
         public List<Error>? Erros { get; set; }
         public ConsultaCep? ConsultaCep { get; set; }
 
@@ -13,22 +14,25 @@ namespace Integracoes.ViaCEP.Dto
 
     public class ConsultaCep
     {
-        [JsonPropertyName("cep")]
+        [JsonProperty("cep")]
         public string? Cep { get; set; }
 
-        [JsonPropertyName("logradouro")]
+        [JsonProperty("logradouro")]
         public string? Logradouro { get; set; }
 
-        [JsonPropertyName("complemento")]
+        [JsonProperty("complemento")]
         public string? Complemento { get; set; }
 
-        [JsonPropertyName("bairro")]
+        [JsonProperty("bairro")]
         public string? Bairro { get; set; }
 
-        [JsonPropertyName("localidade")]
+        [JsonProperty("localidade")]
         public string? Cidade { get; set; }
 
-        [JsonPropertyName("uf")]
+        [JsonProperty("uf")]
         public string? Uf { get; set; }
+
+        [JsonProperty("erro")]
+        public string? Erro { get; set; }
     }
 }

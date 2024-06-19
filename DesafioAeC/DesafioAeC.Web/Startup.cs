@@ -6,6 +6,7 @@ using DesafioAeC.Dominio.Servicos;
 using DesafioAeC.Infra.Data.Contexto;
 using DesafioAeC.Infra.Data.Repositories;
 using DesafioAeC.Web.AutoMapper;
+using Integracoes.ViaCEP;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAeC.Web
@@ -23,17 +24,26 @@ namespace DesafioAeC.Web
         {
             services.AddControllersWithViews();
 
-            // Configuração do AutoMapper
+            //DI AutoMapper
             services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services.AddScoped<AutoMapperProfile>();
-            // Configuração do DbContext
+            //DI DbContext
             services.AddDbContext<DesafioAeCContexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DesafioAeCContext")));
 
+            //DI fluxo Endereço
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
             services.AddScoped<IEnderecoService, EnderecoServico>();
             services.AddScoped<IEnderecoNegocio, EnderecoNegocio>();
+
+            var urlBase = Configuration["ViaCepUrlBase"];
+            services.AddHttpClient<IViaCepClient, ViaCepClient>(x =>
+            {
+                x.BaseAddress = new Uri("https://viacep.com.br/ws/");
+                x.DefaultRequestHeaders.Add("Accept", "application/json");
+                x.Timeout = new TimeSpan(0, 0, 50);
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

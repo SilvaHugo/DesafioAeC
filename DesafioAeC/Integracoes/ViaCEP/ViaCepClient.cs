@@ -6,28 +6,38 @@ namespace Integracoes.ViaCEP
     public class ViaCepClient : IViaCepClient
     {
         private readonly HttpClient _httpClient;
+        private readonly string _endpoint = "";
 
         public ViaCepClient(HttpClient httpClient)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
         public async Task<ConsultaCepResponse> ConsultarCep(ConsultaCepRequest request)
         {
+
             var consultaCepResponse = new ConsultaCepResponse();
-
-            var response = await _httpClient.GetAsync($"https://viacep.com.br/ws/{request.Cep}/json/");
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-
-            consultaCepResponse.Sucesso = response.IsSuccessStatusCode;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                consultaCepResponse.ConsultaCep = JsonConvert.DeserializeObject<ConsultaCep>(jsonResponse);
+                var response = await _httpClient.GetAsync($"{request.Cep}/json/");
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                                
+                if (response.IsSuccessStatusCode)
+                {
+                    consultaCepResponse.ConsultaCep = JsonConvert.DeserializeObject<ConsultaCep>(jsonResponse);
+                    consultaCepResponse.Sucesso = consultaCepResponse.ConsultaCep?.Erro == null;
+
+                    return consultaCepResponse;
+                }
+
+                //tratar retorno de erros
                 return consultaCepResponse;
             }
-
-            //tratar retorno de erros
-            return consultaCepResponse;
+            catch //(Exception ex)
+            {
+                //logar infos do erro
+                return consultaCepResponse;
+            }
         }
     }
 }

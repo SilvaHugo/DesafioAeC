@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Web.ViewModels;
+using Integracoes.ViaCEP.Dto;
 
 namespace DesafioAeC.Web.AutoMapper
 {
@@ -11,6 +12,7 @@ namespace DesafioAeC.Web.AutoMapper
             CreateMap<Endereco, EnderecoViewModel>();
             CreateMap<EnderecoViewModel, Endereco>()
                 .ForMember(dest => dest.Cep, opt => opt.MapFrom(src => src.Cep.Replace("-", ""))); ;
+            CreateMap<ConsultaCep, CepViewModel>();
         }
     }
 }
