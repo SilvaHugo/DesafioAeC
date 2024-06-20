@@ -5,6 +5,7 @@ using DesafioAeC.Web.FluentValidation;
 using DesafioAeC.Web.ViewModels;
 using Integracoes.ViaCEP.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace DesafioAeC.Web.Controllers
 {
@@ -162,6 +163,25 @@ namespace DesafioAeC.Web.Controllers
                 //logar infos do erro
                 return Json(null);
             }            
+        }
+
+        public FileResult ExportarEnderecosParaCSV()
+        {
+            var enderecos = _enderecoNegocio.ObterTodos();
+            var enderecoViewModels = _mapper.Map<IEnumerable<EnderecoViewModel>>(enderecos);
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("Id,Cep,Logradouro,Número,Complemento,Bairro,Cidade,UF");
+
+            foreach (var endereco in enderecoViewModels)
+                stringBuilder.AppendLine($"{endereco.Id},{endereco.CepFormatado},{endereco.Logradouro},{endereco.Numero},{endereco.Complemento},{endereco.Bairro},{endereco.Cidade},{endereco.Uf}");
+
+
+            var content = stringBuilder.ToString();
+            var bytes = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(content)).ToArray();
+            var output = new MemoryStream(bytes);
+
+            return File(output, "text/csv", "Enderecos.csv");
         }
     }
 }
