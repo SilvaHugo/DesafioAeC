@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DesafioAeC.Web.ViewModels.EnderecoViewModel>
+
+@{
+    ViewData["Title"] = "Endereços";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Cep)</th>
+                <th>@Html.DisplayNameFor(model => model.Logradouro)</th>
+                <th>@Html.DisplayNameFor(model => model.Bairro)</th>
+                <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+                <th>@Html.DisplayNameFor(model => model.Uf)</th>
+                <th>@Html.DisplayNameFor(model => model.Numero)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.CepFormatado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Uf)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                    <td>
+                        <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">Detalhes</a>
+                        <a asp-action="Alterar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
+                        <a asp-action="Remover" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="ExportarEnderecosParaCSV" class="btn btn-outline-success line-end mg-left">Exportar</a>
+}
+else
+{
+    <p>Nenhum endereço encontrado.</p>
+}
+
+<a asp-action="Adicionar" class="btn btn-primary line-end">Novo Endereço</a>

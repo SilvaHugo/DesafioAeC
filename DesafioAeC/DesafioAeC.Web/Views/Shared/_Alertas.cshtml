@@ -1,0 +1,17 @@
+﻿
+    @if (TempData["SuccessMessage"] != null)
+    {
+    <script>
+        window.addEventListener("load", (event) => {
+            toastr.success('@TempData["SuccessMessage"]');
+        });            
+    </script>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+    <script>
+        window.addEventListener("load", (event) => {
+            toastr.error('@TempData["ErrorMessage"]');
+        });        
+    </script>
+    }

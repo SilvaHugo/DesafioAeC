@@ -1,0 +1,98 @@
+﻿@model DesafioAeC.Web.ViewModels.EnderecoViewModel
+
+@{
+    ViewData["Title"] = "Novo Endereço";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Adicionar" method="post">
+    <div class="form-group">
+        <label asp-for="Cep">CEP</label>
+        <input type="text" class="form-control" asp-for="Cep" id="cepInput" autocomplete="postal-code">
+        <span asp-validation-for="Cep" id="cepLabel" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Logradouro">Logradouro</label>
+        <input type="text" class="form-control" asp-for="Logradouro">
+        <span asp-validation-for="Logradouro" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Numero">Número</label>
+        <input type="text" class="form-control" asp-for="Numero">
+        <span asp-validation-for="Numero" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Complemento">Complemento</label>
+        <input type="text" class="form-control" asp-for="Complemento">
+        <span asp-validation-for="Complemento" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bairro">Bairro</label>
+        <input type="text" class="form-control" asp-for="Bairro">
+        <span asp-validation-for="Bairro" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Cidade">Cidade</label>
+        <input type="text" class="form-control" asp-for="Cidade">
+        <span asp-validation-for="Cidade" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Uf">UF</label>
+        <input type="text" class="form-control" asp-for="Uf">
+        <span asp-validation-for="Uf" class="text-danger"></span>
+    </div>
+
+    <!-- Outros campos do endereço -->
+
+    <div class="form-group mg-top">
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
+    </div>
+    
+</form>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#cepInput').keyup(function () {
+                var cep = $(this).val().replace(/\D/g, '');
+                if (cep.length == 8) {
+                    $.ajax({
+                        url: '@Url.Action("ConsultarEnderecoPorCep", "Endereco")',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { cep: cep },
+                        success: function (data) {
+                            if(data == null){
+                                toastr.error('Não foi possível encontrar informações do CEP informado.');
+                                $('#Logradouro').val('');
+                                $('#Complemento').val('');
+                                $('#Bairro').val('');
+                                $('#Cidade').val('');
+                                $('#Uf').val('');
+                            }
+
+                            $('#Logradouro').val(data.logradouro);
+                            $('#Complemento').val(data.complemento);
+                            $('#Bairro').val(data.bairro);
+                            $('#Cidade').val(data.cidade);
+                            $('#Uf').val(data.uf);
+                            $('#Numero').focus();
+                        },
+                        error: function (data) {
+                            toastr.error('Erro ao buscar informações do CEP.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

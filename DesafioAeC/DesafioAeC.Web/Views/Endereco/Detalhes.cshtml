@@ -1,0 +1,88 @@
+﻿@model DesafioAeC.Web.ViewModels.EnderecoViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Endereco - ID : @Html.DisplayFor(model => model.Id)</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cep)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CepFormatado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Logradouro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Logradouro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Complemento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Complemento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bairro)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bairro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cidade)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Uf)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Uf)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Alterar" asp-route-id="@Model.Id" class="btn btn-primary">Alterar</a>
+    <a asp-action="Index" class="btn btn-secondary">Retornar</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#cepInput').keyup(function () {
+                var cep = $(this).val().replace(/\D/g, '');
+                if (cep.length == 8) {
+                    $.ajax({
+                        url: '@Url.Action("ConsultarEnderecoPorCep", "Endereco")',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: { cep: cep },
+                        success: function (data) {
+                            $('#Logradouro').val(data.logradouro);
+                            $('#Bairro').val(data.bairro);
+                            $('#Cidade').val(data.localidade);
+                            $('#Uf').val(data.uf);
+                            // Preencher outros campos conforme necessário
+                        },
+                        error: function () {
+                            alert('Erro ao buscar informações do CEP.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
