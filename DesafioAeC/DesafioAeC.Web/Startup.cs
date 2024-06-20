@@ -6,6 +6,8 @@ using DesafioAeC.Dominio.Servicos;
 using DesafioAeC.Infra.Data.Contexto;
 using DesafioAeC.Infra.Data.Repositories;
 using DesafioAeC.Web.AutoMapper;
+using DesafioAeC.Web.Util;
+using DesafioAeC.Web.Util.Interface;
 using Integracoes.ViaCEP;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +39,19 @@ namespace DesafioAeC.Web
             services.AddScoped<IEnderecoService, EnderecoServico>();
             services.AddScoped<IEnderecoNegocio, EnderecoNegocio>();
 
+            //DI fluxo usuário
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddScoped<IUsuarioService, UsuarioServico>();
+            services.AddScoped<IUsuarioNegocio, UsuarioNegocio>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ISessao, Sessao>();
+            services.AddSession(x =>
+            {
+                x.Cookie.HttpOnly = true;
+                x.Cookie.IsEssential = true;
+            });
+
+            //DI integração ViaCEP
             var urlBase = Configuration["ViaCepUrlBase"];
             services.AddHttpClient<IViaCepClient, ViaCepClient>(x =>
             {
@@ -63,11 +78,13 @@ namespace DesafioAeC.Web
             app.UseRouting();
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

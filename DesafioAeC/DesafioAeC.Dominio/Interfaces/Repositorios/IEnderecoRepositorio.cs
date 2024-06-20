@@ -5,5 +5,6 @@ namespace DesafioAeC.Dominio.Interfaces.Repositorios
 {
     public interface IEnderecoRepositorio : IRepositorioBase<Endereco>
     {
+        public IEnumerable<Endereco> ObterEnderecosPorUsuario(Guid idUsuario);
     }
 }

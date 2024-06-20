@@ -1,13 +1,10 @@
-﻿using DesafioAeC.Dominio.Arguments.Error;
-using Newtonsoft.Json;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Integracoes.ViaCEP.Dto
 {
     public class ConsultaCepResponse
     {
         public bool Sucesso { get; set; } = false;
-        public List<Error>? Erros { get; set; }
         public ConsultaCep? ConsultaCep { get; set; }
 
     }

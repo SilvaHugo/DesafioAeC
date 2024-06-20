@@ -4,8 +4,6 @@ using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Dominio.Interfaces.Servicos;
 using Integracoes.ViaCEP;
 using Integracoes.ViaCEP.Dto;
-using Microsoft.AspNetCore.Mvc;
-using System.Text;
 
 namespace Business.Negocio
 {
@@ -22,6 +20,10 @@ namespace Business.Negocio
         }
 
         public async Task<ConsultaCepResponse> ConsultarEnderecoPorCep(ConsultaCepRequest request) => await _viaCepClient.ConsultarCep(request);
-        
+
+        public IEnumerable<Endereco> ObterEnderecosPorUsuario(Guid idUsuario)
+        {
+            return _enderecoService.ObterEnderecosPorUsuario(idUsuario);
+        }
     }
 }

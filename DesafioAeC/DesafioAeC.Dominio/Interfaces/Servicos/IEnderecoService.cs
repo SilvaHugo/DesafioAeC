@@ -5,5 +5,6 @@ namespace DesafioAeC.Dominio.Interfaces.Servicos
 {
     public interface IEnderecoService : IServiceBase<Endereco>
     {
+        public IEnumerable<Endereco> ObterEnderecosPorUsuario(Guid idUsuario);
     }
 }

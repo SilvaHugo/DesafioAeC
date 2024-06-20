@@ -25,9 +25,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioAeC.Infra.Data", "De
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integracoes", "Integracoes", "{1304CAB3-BAC2-4661-B28B-A547CC92334F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAeC.Integracoes", "Integracoes\DesafioAeC.Integracoes.csproj", "{5350ACCC-798E-414B-B8EF-6BC9F2D5743A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioAeC.Integracoes", "Integracoes\DesafioAeC.Integracoes.csproj", "{5350ACCC-798E-414B-B8EF-6BC9F2D5743A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAeC.Business", "Business\DesafioAeC.Business.csproj", "{8EBE3AE2-2B0A-44DC-8F53-E11208EFF4B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioAeC.Business", "Business\DesafioAeC.Business.csproj", "{8EBE3AE2-2B0A-44DC-8F53-E11208EFF4B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4892CC75-8BDF-4438-ACA3-8684AEE85A8D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

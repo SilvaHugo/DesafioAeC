@@ -32,3 +32,15 @@ body {
 .line-end {
     float: inline-end;
 }
+
+.wd-50 {
+    width: 50%;
+}
+
+.wd-100 {
+    width: 100%;
+}
+
+.tx-center{
+    text-align: center;
+}

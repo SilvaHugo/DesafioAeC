@@ -7,13 +7,15 @@ namespace DesafioAeC.Infra.Data.Repositories
 {
     public class UsuarioRepositorio : RepositorioBase<Usuario>, IUsuarioRepositorio
     {
+        private readonly DesafioAeCContexto _context;
         public UsuarioRepositorio(DesafioAeCContexto context) : base(context)
         {
+            _context = context;
         }
 
-        public bool AutenticarUsuario()
+        public Usuario ObterUsuarioPorLogin(string login)
         {
-            throw new NotImplementedException();
+            return _context.Usuarios.SingleOrDefault(x => x.Login == login);
         }
     }
 }

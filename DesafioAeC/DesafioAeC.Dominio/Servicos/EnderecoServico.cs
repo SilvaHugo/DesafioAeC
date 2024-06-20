@@ -13,5 +13,10 @@ namespace DesafioAeC.Dominio.Servicos
         {
             _enderecoRepositorio = enderecoRepositorio;
         }
+
+        public IEnumerable<Endereco> ObterEnderecosPorUsuario(Guid idUsuario)
+        {
+            return _enderecoRepositorio.ObterEnderecosPorUsuario(idUsuario);
+        }
     }
 }

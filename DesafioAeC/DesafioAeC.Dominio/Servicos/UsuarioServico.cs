@@ -1,4 +1,5 @@
-﻿using DesafioAeC.Dominio.Entities;
+﻿using DesafioAeC.Dominio.Arguments.Login;
+using DesafioAeC.Dominio.Entities;
 using DesafioAeC.Dominio.Interfaces.Repositorios;
 using DesafioAeC.Dominio.Interfaces.Servicos;
 using DesafioAeC.Dominio.Servicos.Base;
@@ -15,9 +16,7 @@ namespace DesafioAeC.Dominio.Servicos
             _usuarioRepositorio = usuarioRepositorio;
         }
 
-        public bool AutenticarUsuario()
-        {
-            return _usuarioRepositorio.AutenticarUsuario();
-        }
+        public Usuario ObterUsuarioPorLogin(string loginRequest) => _usuarioRepositorio.ObterUsuarioPorLogin(loginRequest);
+        
     }
 }

@@ -1,31 +1,37 @@
 ﻿using AutoMapper;
 using Business.Interfaces;
 using DesafioAeC.Dominio.Entidades;
+using DesafioAeC.Web.Filters;
 using DesafioAeC.Web.FluentValidation;
+using DesafioAeC.Web.Util.Interface;
 using DesafioAeC.Web.ViewModels;
 using Integracoes.ViaCEP.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
 namespace DesafioAeC.Web.Controllers
 {
+    [UsuarioLogadoFilter]
     public class EnderecoController : Controller
     {
         private readonly IEnderecoNegocio _enderecoNegocio;
         private readonly IMapper _mapper;
+        private readonly ISessao _sessao;
+        private readonly UsuarioViewModel _usuarioLogado;
 
-        public EnderecoController(IEnderecoNegocio enderecoNegocio, IMapper mapper)
+        public EnderecoController(IEnderecoNegocio enderecoNegocio, IMapper mapper, ISessao sessao)
         {
             _enderecoNegocio = enderecoNegocio;
             _mapper = mapper;
+            _sessao = sessao;
+            _usuarioLogado = _sessao.ObterDadosUsuarioLogado();
         }
 
         // GET: EnderecoController
         public ActionResult Index()
         {
-            //ajustar para obter por usuario
-            var enderecoViewModel = _mapper.Map<IEnumerable<EnderecoViewModel>>(_enderecoNegocio.ObterTodos());
-
+            var enderecoViewModel = _mapper.Map<IEnumerable<EnderecoViewModel>>(_enderecoNegocio.ObterEnderecosPorUsuario(_usuarioLogado.Id));
             return View(enderecoViewModel);
         }
 
@@ -33,8 +39,11 @@ namespace DesafioAeC.Web.Controllers
         public ActionResult Detalhes(Guid id)
         {
             var endereco = _enderecoNegocio.ObterPorId(id);
-            var enderecoViewModel = _mapper.Map<EnderecoViewModel>(endereco);
 
+            if(endereco.UsuarioId != _usuarioLogado.Id)            
+                return RedirectToAction(nameof(Index));
+            
+            var enderecoViewModel = _mapper.Map<EnderecoViewModel>(endereco);
             return View(enderecoViewModel);
         }
 
@@ -56,6 +65,7 @@ namespace DesafioAeC.Web.Controllers
 
                 if (validationResult.IsValid)
                 {
+                    endereco.UsuarioId = _usuarioLogado.Id;
                     var enderecoEntity = _mapper.Map<Endereco>(endereco);
                     _enderecoNegocio.Inserir(enderecoEntity);
 
@@ -82,6 +92,10 @@ namespace DesafioAeC.Web.Controllers
         public ActionResult Alterar(Guid id)
         {
             var endereco = _enderecoNegocio.ObterPorId(id);
+
+            if (endereco.UsuarioId != _usuarioLogado.Id)
+                return RedirectToAction(nameof(Index));
+
             var enderecoViewModel = _mapper.Map<EnderecoViewModel>(endereco);
 
             return View(enderecoViewModel);
@@ -167,7 +181,7 @@ namespace DesafioAeC.Web.Controllers
 
         public FileResult ExportarEnderecosParaCSV()
         {
-            var enderecos = _enderecoNegocio.ObterTodos();
+            var enderecos = _enderecoNegocio.ObterEnderecosPorUsuario(_usuarioLogado.Id);
             var enderecoViewModels = _mapper.Map<IEnumerable<EnderecoViewModel>>(enderecos);
 
             var stringBuilder = new StringBuilder();
