@@ -25,11 +25,13 @@ namespace DesafioAeC.Web.Controllers
         public IActionResult Index()
         {
             if(_sessao.ObterDadosUsuarioLogado() != null) return RedirectToAction("Index", "Endereco");
+            ViewBag.ActiveTab = "Login";
             return View();
         }
 
         public IActionResult Cadastrar()
         {
+            ViewBag.ActiveTab = "Cadastrar";
             return View();
         }
 
@@ -53,7 +55,7 @@ namespace DesafioAeC.Web.Controllers
                     }
 
                     TempData["ErrorMessage"] = retorno.Mensagem;
-                    return View(nameof(Index));
+                    return RedirectToAction("Index", "Login");
                 }
 
                 string msgErro = "";
@@ -63,7 +65,7 @@ namespace DesafioAeC.Web.Controllers
                 
 
                 TempData["ErrorMessage"] = msgErro;
-                return View(nameof(Index));
+                return RedirectToAction("Index", "Login");
             }
             catch //(Exception ex)
             {
@@ -95,7 +97,7 @@ namespace DesafioAeC.Web.Controllers
                     if (!retorno.Sucesso)
                     {
                         TempData["ErrorMessage"] = retorno.Mensagem;
-                        return RedirectToAction(nameof(Cadastrar));
+                        return RedirectToAction("Cadastrar", "Login");
                     }
 
                     TempData["SuccessMessage"] = retorno.Mensagem;
@@ -109,7 +111,7 @@ namespace DesafioAeC.Web.Controllers
 
 
                 TempData["ErrorMessage"] = msgErro;
-                return RedirectToAction(nameof(Cadastrar));
+                return RedirectToAction("Cadastrar", "Login");
             }
             catch //(Exception)
             {

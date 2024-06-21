@@ -32,7 +32,14 @@ namespace DesafioAeC.Web.Controllers
         public ActionResult Index()
         {
             var enderecoViewModel = _mapper.Map<IEnumerable<EnderecoViewModel>>(_enderecoNegocio.ObterEnderecosPorUsuario(_usuarioLogado.Id));
-            return View(enderecoViewModel);
+
+            var indexEnderecosViewModel = new IndexEnderecosViewModel()
+            {
+                EnderecosViewModel = enderecoViewModel,
+                UsuarioViewModel = _usuarioLogado
+            };
+
+            return View(indexEnderecosViewModel);
         }
 
         // GET: EnderecoController/Detalhes/guid

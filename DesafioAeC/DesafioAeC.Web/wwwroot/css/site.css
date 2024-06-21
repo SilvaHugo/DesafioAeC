@@ -44,3 +44,33 @@ body {
 .tx-center{
     text-align: center;
 }
+
+.nada-cadastrado {
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    padding: 14px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, .27);
+    border-radius: 3px;
+    color: #5a5555;
+}
+
+.nada-cadastrado > a {
+    text-decoration: none;
+    color: #212121;
+}
+
+.nada-cadastrado > a:hover {
+    color: #5a5555;
+}
+
+.container.table {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pd-0{
+    padding:0;
+}
