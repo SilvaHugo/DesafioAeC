@@ -23,7 +23,7 @@ toastr | toastr é uma biblioteca de notificações JavaScript que permite exibi
 
 ## Instalação
 1. Clone o repositório: [DesafioAeC](https://github.com/SilvaHugo/DesafioAeC);
-2. Crie o banco de dados e execute o script para criação das tabelas (está localizado na raiz do repositório);
+2. Crie o banco de dados e execute o script para criação das tabelas (está localizado na raiz do repositório; Altere o nome da base conforme necessidade);
 3. Configure a ConnectionString "DesafioAeCContext" com o Usuário e Senha que terá acesso de escrita e leitura na base criada;
 4. Defina o projeto DesafioAeC.Web como Projeto de Inicialização e execute a aplicação.
 
