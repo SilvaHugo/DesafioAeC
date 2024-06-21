@@ -7,10 +7,10 @@ namespace DesafioAeC.Web.ViewModels
     {
         [Key]
         public Guid Id { get; set; }
-        
+
         [ScaffoldColumn(false)]
         public DateTime CriadoEm { get; set; }
-        
+
         [ScaffoldColumn(false)]
         public DateTime? AlteradoEm { get; set; }
 

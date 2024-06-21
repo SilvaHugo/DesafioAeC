@@ -1,4 +1,4 @@
-﻿namespace Business.Interfaces.Base
+﻿namespace DesafioAeC.Business.Interfaces.Base
 {
     public interface INegocioBase<TEntidade> where TEntidade : class
     {

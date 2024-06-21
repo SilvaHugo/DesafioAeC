@@ -1,7 +1,7 @@
-﻿using Business.Interfaces.Base;
+﻿using DesafioAeC.Business.Interfaces.Base;
 using DesafioAeC.Dominio.Interfaces.Servicos.Base;
 
-namespace Business.Negocio.Base
+namespace DesafioAeC.Business.Negocio.Base
 {
     public class NegocioBase<TEntidade> : IDisposable, INegocioBase<TEntidade> where TEntidade : class
     {

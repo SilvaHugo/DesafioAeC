@@ -1,21 +1,20 @@
 ﻿using AutoMapper;
-using Business.Interfaces;
-using Business.Negocio.Base;
+using DesafioAeC.Business.Interfaces;
+using DesafioAeC.Business.Negocio.Base;
 using DesafioAeC.Dominio;
 using DesafioAeC.Dominio.Arguments.Login;
 using DesafioAeC.Dominio.Arguments.Usuario;
-using DesafioAeC.Dominio.Entities;
+using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Dominio.Interfaces.Servicos;
-using DesafioAeC.Dominio.Interfaces.Servicos.Base;
 using DesafioAeC.Dominio.Shared;
 
-namespace Business.Negocio
+namespace DesafioAeC.Business.Negocio
 {
     public class UsuarioNegocio : NegocioBase<Usuario>, IUsuarioNegocio
     {
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
-        public UsuarioNegocio(IUsuarioService usuarioService, IMapper mapper) 
+        public UsuarioNegocio(IUsuarioService usuarioService, IMapper mapper)
             : base(usuarioService)
         {
             _usuarioService = usuarioService;
@@ -29,7 +28,7 @@ namespace Business.Negocio
 
             if (usuario != null)
             {
-                var senhaValida = HashSenha.VerifyPassword(loginRequest.Senha, usuario.Senha, false);
+                var senhaValida = HashSenha.VerificarSenha(loginRequest.Senha, usuario.Senha, false);
 
                 if (senhaValida)
                 {
@@ -55,7 +54,7 @@ namespace Business.Negocio
             if (usuario != null)
             {
                 response.Sucesso = false;
-                response.Mensagem = "Usuário já registrado na base.";
+                response.Mensagem = "Usuário já registrado na base. Forneça um Login diferente";
             }
             else
             {

@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using Business.Interfaces;
+using DesafioAeC.Business.Interfaces;
 using DesafioAeC.Dominio.Entidades;
+using DesafioAeC.Integracoes.ViaCEP.Dto;
 using DesafioAeC.Web.Filters;
 using DesafioAeC.Web.FluentValidation;
 using DesafioAeC.Web.Util.Interface;
 using DesafioAeC.Web.ViewModels;
-using Integracoes.ViaCEP.Dto;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
@@ -47,9 +46,9 @@ namespace DesafioAeC.Web.Controllers
         {
             var endereco = _enderecoNegocio.ObterPorId(id);
 
-            if(endereco.UsuarioId != _usuarioLogado.Id)            
+            if (endereco.UsuarioId != _usuarioLogado.Id)
                 return RedirectToAction(nameof(Index));
-            
+
             var enderecoViewModel = _mapper.Map<EnderecoViewModel>(endereco);
             return View(enderecoViewModel);
         }
@@ -166,7 +165,7 @@ namespace DesafioAeC.Web.Controllers
 
         [HttpGet]
         public async Task<ActionResult> ConsultarEnderecoPorCep(string cep)
-         {
+        {
             try
             {
                 var consultaCepResponse = await _enderecoNegocio.ConsultarEnderecoPorCep(new ConsultaCepRequest() { Cep = cep });
@@ -183,7 +182,7 @@ namespace DesafioAeC.Web.Controllers
             {
                 //logar infos do erro
                 return Json(null);
-            }            
+            }
         }
 
         public FileResult ExportarEnderecosParaCSV()

@@ -1,14 +1,14 @@
-﻿using Business.Interfaces;
-using Business.Negocio;
+﻿using DesafioAeC.Business.Interfaces;
+using DesafioAeC.Business.Negocio;
 using DesafioAeC.Dominio.Interfaces.Repositorios;
 using DesafioAeC.Dominio.Interfaces.Servicos;
 using DesafioAeC.Dominio.Servicos;
 using DesafioAeC.Infra.Data.Contexto;
 using DesafioAeC.Infra.Data.Repositories;
+using DesafioAeC.Integracoes.ViaCEP;
 using DesafioAeC.Web.AutoMapper;
 using DesafioAeC.Web.Util;
 using DesafioAeC.Web.Util.Interface;
-using Integracoes.ViaCEP;
 using Microsoft.EntityFrameworkCore;
 
 namespace DesafioAeC.Web

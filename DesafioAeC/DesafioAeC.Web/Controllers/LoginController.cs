@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Business.Interfaces;
+using DesafioAeC.Business.Interfaces;
 using DesafioAeC.Dominio.Arguments.Login;
 using DesafioAeC.Dominio.Arguments.Usuario;
-using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Web.FluentValidation;
 using DesafioAeC.Web.Util.Interface;
 using DesafioAeC.Web.ViewModels;
@@ -24,7 +23,7 @@ namespace DesafioAeC.Web.Controllers
         }
         public IActionResult Index()
         {
-            if(_sessao.ObterDadosUsuarioLogado() != null) return RedirectToAction("Index", "Endereco");
+            if (_sessao.ObterDadosUsuarioLogado() != null) return RedirectToAction("Index", "Endereco");
             ViewBag.ActiveTab = "Login";
             return View();
         }
@@ -62,7 +61,7 @@ namespace DesafioAeC.Web.Controllers
 
                 foreach (var erro in validationResult.Errors)
                     msgErro += erro.ErrorMessage + " ";
-                
+
 
                 TempData["ErrorMessage"] = msgErro;
                 return RedirectToAction("Index", "Login");

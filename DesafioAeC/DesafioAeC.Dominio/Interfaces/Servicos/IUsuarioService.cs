@@ -1,5 +1,4 @@
-﻿using DesafioAeC.Dominio.Arguments.Login;
-using DesafioAeC.Dominio.Entities;
+﻿using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Dominio.Interfaces.Servicos.Base;
 
 namespace DesafioAeC.Dominio.Interfaces.Servicos

@@ -1,7 +1,5 @@
 ﻿using DesafioAeC.Dominio.Interfaces.Repositorios.Base;
-using DesafioAeC.Infra.Data.Contexto;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace DesafioAeC.Infra.Data.Repositories.Base
 {
