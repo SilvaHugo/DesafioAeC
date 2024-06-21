@@ -74,3 +74,9 @@ body {
 .pd-0{
     padding:0;
 }
+
+.btn-tabela-endereco {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    min-width: 71px;
+}
