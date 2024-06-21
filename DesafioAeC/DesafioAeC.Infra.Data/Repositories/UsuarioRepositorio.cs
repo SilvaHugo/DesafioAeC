@@ -1,4 +1,4 @@
-﻿using DesafioAeC.Dominio.Entities;
+﻿using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Dominio.Interfaces.Repositorios;
 using DesafioAeC.Infra.Data.Contexto;
 using DesafioAeC.Infra.Data.Repositories.Base;

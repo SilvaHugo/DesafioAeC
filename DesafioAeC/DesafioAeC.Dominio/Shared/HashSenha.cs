@@ -14,9 +14,9 @@ namespace DesafioAeC.Dominio.Shared
             }
         }
 
-        public static bool VerifyPassword(string senhaPreenchida, string senhaArmazenada, bool isToHash)
+        public static bool VerificarSenha(string senhaPreenchida, string senhaArmazenada, bool isToHash)
         {
-            if(isToHash)
+            if (isToHash)
                 senhaPreenchida = HashPassword(senhaPreenchida);
 
             return senhaPreenchida == senhaArmazenada;

@@ -2,10 +2,9 @@
 using DesafioAeC.Dominio.Arguments.Login;
 using DesafioAeC.Dominio.Arguments.Usuario;
 using DesafioAeC.Dominio.Entidades;
-using DesafioAeC.Dominio.Entities;
 using DesafioAeC.Dominio.Shared;
+using DesafioAeC.Integracoes.ViaCEP.Dto;
 using DesafioAeC.Web.ViewModels;
-using Integracoes.ViaCEP.Dto;
 
 namespace DesafioAeC.Web.AutoMapper
 {

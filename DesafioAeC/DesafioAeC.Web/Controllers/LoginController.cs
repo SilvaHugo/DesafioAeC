@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using Business.Interfaces;
+using DesafioAeC.Business.Interfaces;
 using DesafioAeC.Dominio.Arguments.Login;
 using DesafioAeC.Dominio.Arguments.Usuario;
-using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Web.FluentValidation;
 using DesafioAeC.Web.Util.Interface;
 using DesafioAeC.Web.ViewModels;
@@ -24,12 +23,14 @@ namespace DesafioAeC.Web.Controllers
         }
         public IActionResult Index()
         {
-            if(_sessao.ObterDadosUsuarioLogado() != null) return RedirectToAction("Index", "Endereco");
+            if (_sessao.ObterDadosUsuarioLogado() != null) return RedirectToAction("Index", "Endereco");
+            ViewBag.ActiveTab = "Login";
             return View();
         }
 
         public IActionResult Cadastrar()
         {
+            ViewBag.ActiveTab = "Cadastrar";
             return View();
         }
 
@@ -52,18 +53,18 @@ namespace DesafioAeC.Web.Controllers
                         return RedirectToAction("Index", "Endereco");
                     }
 
-                    TempData["ErrorMessage"] = retorno.Mensagem;
-                    return View(nameof(Index));
+                    TempData["ErrorMessage"] = !string.IsNullOrEmpty(retorno.Mensagem) ? retorno.Mensagem : "Usuário e/ou senha inválido(s)";
+                    return RedirectToAction("Index", "Login");
                 }
 
                 string msgErro = "";
 
                 foreach (var erro in validationResult.Errors)
                     msgErro += erro.ErrorMessage + " ";
-                
+
 
                 TempData["ErrorMessage"] = msgErro;
-                return View(nameof(Index));
+                return RedirectToAction("Index", "Login");
             }
             catch //(Exception ex)
             {
@@ -95,7 +96,7 @@ namespace DesafioAeC.Web.Controllers
                     if (!retorno.Sucesso)
                     {
                         TempData["ErrorMessage"] = retorno.Mensagem;
-                        return RedirectToAction(nameof(Cadastrar));
+                        return RedirectToAction("Cadastrar", "Login");
                     }
 
                     TempData["SuccessMessage"] = retorno.Mensagem;
@@ -109,7 +110,7 @@ namespace DesafioAeC.Web.Controllers
 
 
                 TempData["ErrorMessage"] = msgErro;
-                return RedirectToAction(nameof(Cadastrar));
+                return RedirectToAction("Cadastrar", "Login");
             }
             catch //(Exception)
             {

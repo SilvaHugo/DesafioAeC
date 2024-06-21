@@ -1,4 +1,4 @@
-﻿using DesafioAeC.Dominio.Entities;
+﻿using DesafioAeC.Dominio.Entidades;
 using DesafioAeC.Dominio.Interfaces.Repositorios.Base;
 
 namespace DesafioAeC.Dominio.Interfaces.Repositorios

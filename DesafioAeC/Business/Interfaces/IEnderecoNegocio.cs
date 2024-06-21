@@ -1,8 +1,8 @@
-﻿using Business.Interfaces.Base;
+﻿using DesafioAeC.Business.Interfaces.Base;
 using DesafioAeC.Dominio.Entidades;
-using Integracoes.ViaCEP.Dto;
+using DesafioAeC.Integracoes.ViaCEP.Dto;
 
-namespace Business.Interfaces
+namespace DesafioAeC.Business.Interfaces
 {
     public interface IEnderecoNegocio : INegocioBase<Endereco>
     {

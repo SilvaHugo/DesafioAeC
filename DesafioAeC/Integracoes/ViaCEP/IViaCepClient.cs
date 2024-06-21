@@ -1,6 +1,6 @@
-﻿using Integracoes.ViaCEP.Dto;
+﻿using DesafioAeC.Integracoes.ViaCEP.Dto;
 
-namespace Integracoes.ViaCEP
+namespace DesafioAeC.Integracoes.ViaCEP
 {
     public interface IViaCepClient
     {

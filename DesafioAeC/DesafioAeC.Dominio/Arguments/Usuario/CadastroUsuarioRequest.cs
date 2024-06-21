@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DesafioAeC.Dominio.Arguments.Usuario
+﻿namespace DesafioAeC.Dominio.Arguments.Usuario
 {
     public class CadastroUsuarioRequest
     {

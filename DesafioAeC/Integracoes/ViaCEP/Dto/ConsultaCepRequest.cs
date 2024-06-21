@@ -1,4 +1,4 @@
-﻿namespace Integracoes.ViaCEP.Dto
+﻿namespace DesafioAeC.Integracoes.ViaCEP.Dto
 {
     public class ConsultaCepRequest
     {

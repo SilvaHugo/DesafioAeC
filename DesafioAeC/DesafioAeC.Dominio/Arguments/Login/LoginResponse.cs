@@ -1,4 +1,4 @@
-﻿using DesafioAeC.Dominio.Entities;
+﻿using DesafioAeC.Dominio.Entidades;
 
 namespace DesafioAeC.Dominio;
 

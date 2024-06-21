@@ -29,10 +29,10 @@
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs">
                                 <li class="nav-item wd-50">
-                                    <a class="nav-link wd-100 tx-center" href="~/Login/Index">Login</a>
+                                    <a class="nav-link wd-100 tx-center @(ViewBag.ActiveTab == "Login" ? "active" : "")" href="~/Login/Index">Login</a>
                                 </li>
                                 <li class="nav-item wd-50">
-                                    <a class="nav-link wd-100 tx-center" href="~/Login/Cadastrar">Cadastrar</a>
+                                    <a class="nav-link wd-100 tx-center @(ViewBag.ActiveTab == "Cadastrar" ? "active" : "")" href="~/Login/Cadastrar">Cadastrar</a>
                                 </li>
                             </ul>
                         </div>

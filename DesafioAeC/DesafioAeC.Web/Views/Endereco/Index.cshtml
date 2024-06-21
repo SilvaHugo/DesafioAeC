@@ -1,49 +1,77 @@
-﻿@model IEnumerable<DesafioAeC.Web.ViewModels.EnderecoViewModel>
+﻿@model DesafioAeC.Web.ViewModels.IndexEnderecosViewModel
 
 @{
     ViewData["Title"] = "Endereços";
 }
+<link rel="stylesheet" href="~/lib/dataTable/dataTables.min" />
 
-<h1>@ViewData["Title"]</h1>
+<h1></h1>
 
-@if (Model != null && Model.Any())
+<div class="container px-4 px-lg-5 my-5">
+    <div class="text-center">
+        <h1 class="display-5 text-black-50 ">Olá, @Model.UsuarioViewModel.ObterPrimeiroNome(Model.UsuarioViewModel.Nome)!</h1>
+        <p class="lead fw-normal text-black-50 mb-0">Abaixo estão os seus endereços cadastrados. Para adicionar, alterar ou remover algum endereço, utilize as opções disponíveis na tabela.</p>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10"></div>
+    <div class="col-md-2">
+        <a asp-action="Adicionar" class="btn btn-primary line-end wd-100">Novo Endereço</a>
+    </div>
+</div>
+@if (Model.EnderecosViewModel != null && Model.EnderecosViewModel.Any())
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Cep)</th>
-                <th>@Html.DisplayNameFor(model => model.Logradouro)</th>
-                <th>@Html.DisplayNameFor(model => model.Bairro)</th>
-                <th>@Html.DisplayNameFor(model => model.Cidade)</th>
-                <th>@Html.DisplayNameFor(model => model.Uf)</th>
-                <th>@Html.DisplayNameFor(model => model.Numero)</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <a asp-action="ExportarEnderecosParaCSV" class="btn btn-outline-success line-end wd-100 mg-top">Exportar</a>
+        </div>
+    </div>
+    <div class="container table pd-0">
+        <table class="table" id="tabelaEnderecos">
+            <thead>
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.CepFormatado)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Uf)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Numero)</td>
-                    <td>
-                        <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">Detalhes</a>
-                        <a asp-action="Alterar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
-                        <a asp-action="Remover" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Excluir</a>
-                    </td>
+                    <th>CEP</th>
+                    <th>Logradouro</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>UF</th>
+                    <th>Número</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <a asp-action="ExportarEnderecosParaCSV" class="btn btn-outline-success line-end mg-left">Exportar</a>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EnderecosViewModel)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.CepFormatado)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Logradouro)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Bairro)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Uf)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                        <td>
+                            <a asp-action="Detalhes" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">Detalhes</a>
+                            <a asp-action="Alterar" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Editar</a>
+                            <a asp-action="Remover" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
 }
 else
 {
-    <p>Nenhum endereço encontrado.</p>
+    <div class="nada-cadastrado"> Nenhum endereço cadastrado. </div>
 }
 
-<a asp-action="Adicionar" class="btn btn-primary line-end">Novo Endereço</a>
+
+
+<script src="~/lib/dataTables/dataTables.min.js"></script>
+<script>
+    
+</script>

@@ -15,7 +15,7 @@ namespace DesafioAeC.Web.Util
         }
 
         public void CriarSessaoUsuario(UsuarioViewModel usuario) => _httpContext?.HttpContext?.Session.SetString(_chaveSession, JsonConvert.SerializeObject(usuario));
-        
+
 
         public UsuarioViewModel ObterDadosUsuarioLogado()
         {
@@ -23,10 +23,10 @@ namespace DesafioAeC.Web.Util
 
             if (string.IsNullOrEmpty(usuarioLogado)) return null;
 
-            return JsonConvert.DeserializeObject<UsuarioViewModel>(usuarioLogado);    
+            return JsonConvert.DeserializeObject<UsuarioViewModel>(usuarioLogado);
         }
 
         public void RemoverSessaoUsuario() => _httpContext.HttpContext.Session.Remove(_chaveSession);
-        
+
     }
 }

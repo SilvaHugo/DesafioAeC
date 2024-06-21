@@ -1,4 +1,4 @@
-﻿using DesafioAeC.Dominio.Entities;
+﻿using DesafioAeC.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

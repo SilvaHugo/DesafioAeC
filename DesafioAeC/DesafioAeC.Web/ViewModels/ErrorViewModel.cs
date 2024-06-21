@@ -1,4 +1,4 @@
-namespace DesafioAeC.Web.Models
+namespace DesafioAeC.Web.ViewModels
 {
     public class ErrorViewModel
     {

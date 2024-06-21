@@ -1,7 +1,7 @@
-﻿using Integracoes.ViaCEP.Dto;
+﻿using DesafioAeC.Integracoes.ViaCEP.Dto;
 using Newtonsoft.Json;
 
-namespace Integracoes.ViaCEP
+namespace DesafioAeC.Integracoes.ViaCEP
 {
     public class ViaCepClient : IViaCepClient
     {
@@ -21,7 +21,7 @@ namespace Integracoes.ViaCEP
             {
                 var response = await _httpClient.GetAsync($"{request.Cep}/json/");
                 var jsonResponse = await response.Content.ReadAsStringAsync();
-                                
+
                 if (response.IsSuccessStatusCode)
                 {
                     consultaCepResponse.ConsultaCep = JsonConvert.DeserializeObject<ConsultaCep>(jsonResponse);

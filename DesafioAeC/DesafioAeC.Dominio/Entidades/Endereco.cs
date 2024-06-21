@@ -1,5 +1,4 @@
 ﻿using DesafioAeC.Dominio.Entidades.Base;
-using DesafioAeC.Dominio.Entities;
 
 namespace DesafioAeC.Dominio.Entidades
 {
