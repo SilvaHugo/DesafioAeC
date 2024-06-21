@@ -1,5 +1,4 @@
 ﻿using DesafioAeC.Dominio.Entidades;
-using DesafioAeC.Dominio.Entities;
 using DesafioAeC.Infra.Data.EntityConfig;
 using Microsoft.EntityFrameworkCore;
 
@@ -72,7 +71,32 @@ namespace DesafioAeC.Infra.Data.Contexto
                 {
                     entry.Property("Id").CurrentValue = Guid.NewGuid();
                 }
+
+                // Não deixa alterar o Id em updates
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("Id").IsModified = false;
+                }
             }
+
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("UsuarioId") != null))
+            {
+                // Não deixa alterar o Id em updates
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("UsuarioId").IsModified = false;
+                }
+            }
+
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("AlteradoEm") != null))
+            {
+                // Define data de alteração por padrão a data atual
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("AlteradoEm").CurrentValue = DateTime.Now;
+                }
+            }
+
             return base.SaveChanges();
         }
     }
