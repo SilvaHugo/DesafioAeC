@@ -53,7 +53,7 @@ namespace DesafioAeC.Web.Controllers
                         return RedirectToAction("Index", "Endereco");
                     }
 
-                    TempData["ErrorMessage"] = retorno.Mensagem;
+                    TempData["ErrorMessage"] = !string.IsNullOrEmpty(retorno.Mensagem) ? retorno.Mensagem : "Usuário e/ou senha inválido(s)";
                     return RedirectToAction("Index", "Login");
                 }
 
